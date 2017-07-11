@@ -1,0 +1,36 @@
+{
+  "name": "renju",
+  "version": "1.0.0",
+  "description": "多人五子棋",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "node ./bin/dev-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ld000/renju.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ld000/renju/issues"
+  },
+  "homepage": "https://github.com/ld000/renju#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.4",
+    "express": "^4.15.3",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.1.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
