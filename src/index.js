@@ -1,6 +1,6 @@
 import './style.css';
 
-var players = ['black', 'white', 'red', 'yellow', 'blue'];
+var players = [{ name: 'player1', color: 'black' }, { name: 'player2', color: 'white' }];
 var order = 0;
 
 var Game = (function() {
@@ -30,8 +30,28 @@ var Game = (function() {
     ele.innerHTML = board
   }
 
+  function renderPlayerBox() {
+    const div = document.getElementById('players')
+
+    let dom = '<ul>'
+    players.forEach(item => {
+      dom += (`
+          <li class="player">
+            <span>${item.name}: </span><div style="width: 20px; height: 20px; background-color: ${item.color};"></div>
+          </li>
+        `)
+    })
+    dom += '</ul>'
+    div.innerHTML = dom
+  }
+
+  function init(num) {
+    renderBoard(num)
+    renderPlayerBox()
+  }
+
   function bindEvent() {
-    ele.addEventListener('click', (e)=> {
+    ele.addEventListener('click', (e) => {
       // if(isWin) {
       //   return
       // }
@@ -40,24 +60,40 @@ var Game = (function() {
         // chessColor = 3 - chessColor
         var coord = target.getAttribute('data-coord').split(',')
 
-        if (order < 4) {
+        console.log('position: ' + coord + ' color: ' + players[order]);
+
+        target.classList.add(players[order].color)
+
+        if (order < players.length - 1) {
           order++
         } else {
           order = 0
         }
 
-        console.log('position: ' + coord + ' color: ' + players[order]);
-
-        target.classList.add(players[order])
         // mygobang.palyChess(+coord[0], +coord[1], chessColor)
       }
     })
   }
 
+  function bindAddPlayerEvent() {
+    document.getElementById('add-player').addEventListener('click', (e) => {
+      const name = document.getElementById('name-input').value
+      const color = document.getElementById('color-input').value
+
+      players.push({
+        name: name,
+        color: color
+      })
+
+      console.log('Add player, name: ' + name + ', color: ' + color)
+    })
+  }
+
   return {
     start(num) {
-      renderBoard(num)
+      init(num)
       bindEvent()
+      bindAddPlayerEvent()
     }
   }
 })()
